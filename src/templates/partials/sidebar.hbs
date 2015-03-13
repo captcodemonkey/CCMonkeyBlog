@@ -1,0 +1,54 @@
+<section class="social">
+  <ul>
+    <li class="rss">
+      <a href="http://feeds.feedburner.com/Andismith" target-="_blank"><span>RSS</span></a>
+    </li>
+    <li class="twitter">
+      <a href="http://www.twitter.com/andismith" target-="_blank"><span>@andismith</span></a>
+    </li>
+    <li class="contact">
+      <a href="/contact" target-="_blank"><span>Email me</span></a>
+    </li>
+    <li class="github">
+      <a href="https://github.com/andismith" target-="_blank"><span>andismith</span></a>
+    </li>
+    <li class="lanyrd">
+      <a href="http://lanyrd.com/profile/andismith/" target-="_blank"><span>andismith</span></a>
+    </li>
+    <li class="google-plus">
+      <a href="https://plus.google.com/+AndiSmithUK/?rel=author" target-="_blank"><span>AndiSmithUK</span></a>
+    </li>
+    <li class="linked-in">
+      <a href="http://uk.linkedin.com/in/andismith/" target-="_blank"><span>andismith</span></a>
+    </li>
+    <li class="instagram">
+      <a href="http://instagram.com/andismith" target-="_blank"><span>andismith</span></a>
+    </li>
+  </ul>
+</section>
+
+<section class="content-block">
+  <h1 class="aside">Latest</h1>
+  <ul>
+    {{!-- {{list posts}} --}}
+    {{#if this.page.data.listPosts }}
+    {{#each site.entries}}
+    {{ this.url }}
+    {{/each}}
+
+    {{/if}}
+  </ul>
+</section>
+
+<section class="content-block">
+  <h1 class="aside">Categories</h1>
+  <ul>
+    <li><a href="/blog/category/conferences">Conferences</a></li>
+    <li><a href="/blog/category/css">CSS</a></li>
+    <li><a href="/blog/category/dev-tools">Dev Tools</a></li>
+    <li><a href="/blog/category/general">General</a></li>
+    <li><a href="/blog/category/javascript">JavaScript</a></li>
+    <li><a href="/blog/category/jquery">jQuery</a></li>
+    <li><a href="/blog/category/site">Site</a></li>
+  </ul>
+</section>

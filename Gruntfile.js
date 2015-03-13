@@ -112,19 +112,51 @@ module.exports = function(grunt) {
 		},
 
     assemble: {
+			options: {
+				flatten: true,
+				assets: '<%= config.dist %>/assets',
+				layout: '<%= config.src %>/templates/layouts/default.hbs',
+				data: '<%= config.src %>/data/*.{json,yml}',
+				helpers: '<%= config.src %>/templates/helpers/**/*.js',
+				partials: '<%= config.src %>/templates/partials/*.hbs'
+			},
+			// Generate posts by forcing Handlebars
+			// to recognize `.md` files as templates.
+			posts: {
+				options: {
+					collections: [{
+						name: 'entries',
+						sortby: 'posted',
+						sortorder: 'descending'
+					}],
+					expand: true,
+					plugins: ['assemble-contrib-permalinks'],
+					permalinks: {
+						structure: ':year/:month/:basename:ext'
+					},
+					layout: '<%= config.src %>/templates/layouts/default.hbs'
+				},
+				files: {
+					'<%= config.dist %>/blog/': ['<%= config.src %>/content/blog/*.hbs']
+				}
+			},
       pages: {
         options: {
-          flatten: true,
-          assets: '<%= config.dist %>/assets',
-          layout: '<%= config.src %>/templates/layouts/default.hbs',
-          data: '<%= config.src %>/data/*.{json,yml}',
-          partials: '<%= config.src %>/templates/partials/*.hbs',
-          plugins: ['assemble-contrib-anchors','assemble-contrib-permalinks','assemble-contrib-sitemap','assemble-contrib-toc'],
+          plugins: ['assemble-contrib-anchors','assemble-contrib-permalinks','assemble-contrib-sitemap','assemble-contrib-toc']
         },
         files: {
           '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
         }
-      }
+      },
+			blog: {
+				options: {
+					flatten: true,
+					plugins: ['assemble-contrib-permalinks']
+				},
+				files: {
+					'<%= config.dist %>/blog/': ['<%= config.src %>/templates/pages/blog/*.hbs']
+				}
+			}
     },
 
     copy: {

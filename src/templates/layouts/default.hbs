@@ -26,12 +26,26 @@
   </head>
   <body>
 
+
+
     {{> header }}
 
-    <div class="container theme-showcase" role="main">
+    <div class="wrapper">
+      <div class="row">
+        <div id="main" role="main">
 
-      {{> body }}
+          {{> top }}
 
+          <article>
+            {{> body }}
+          </article>
+
+        </div>
+
+        <aside id="sidebar">
+          {{> sidebar }}
+        </aside>
+      </div>
     </div>
 
     <!-- build:js assets/js/vendor.js -->

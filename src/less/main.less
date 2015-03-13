@@ -1,4 +1,5 @@
 @import "../../bower_components/lesshat/build/lesshat.less";
+@import "semantic-grids";
 @import "mixins.less";
 
 @blue: #3498db;
@@ -9,6 +10,7 @@
 @blue_dark: #34495e;
 @white: #ffffff;
 @white_off: #eeeeee;
+@gutter : 15px;
 @img_base: "/assets/images/";
 
 /* apply a natural box layout model to all elements, but allowing components to change */
@@ -30,6 +32,7 @@ h1 {
   border-left-style: solid;
   border-left-width: 12px;
   padding-left: 20px;
+  font-size: 2.2em;
 }
 
 .blog {
@@ -49,7 +52,7 @@ h1 {
 }
 
 h1 {
-  font-size: 2.8em;
+  font-size: 2.2em;
 }
 
 a {
@@ -62,6 +65,26 @@ body {
   color: #464646;
   font: 200 100%/1.6 Lato, sans-serif;
   letter-spacing: 0;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+#main {
+  .column(9);
+
+  .page-intro {
+    .clearfix();
+  }
+
+  article {
+    padding: @gutter;
+  }
+}
+
+#sidebar {
+  .column(3);
 }
 
 #top {
@@ -145,6 +168,8 @@ body {
 
 .highlights {
 
+  padding: @gutter;
+
   ul {
     .list-reset();
 
@@ -152,6 +177,13 @@ body {
       color: @white;
       .inline-block();
       padding: 20px;
+      width: 49%;
+      margin-left: 2%;
+      float: left;
+
+      &:first-child {
+        margin-left: 0px;
+      }
 
       h1 {
         border-color: @white;
