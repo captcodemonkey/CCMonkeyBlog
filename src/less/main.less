@@ -1,0 +1,183 @@
+@import "../../bower_components/lesshat/build/lesshat.less";
+@import "mixins.less";
+
+@blue: #3498db;
+@green: #2ecc71;
+@purple: #9b59b6;
+@orange: #e67e22;
+@red: #e74c3c;
+@blue_dark: #34495e;
+@white: #ffffff;
+@white_off: #eeeeee;
+@img_base: "/assets/images/";
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Droid Serif", serif;
+  text-decoration: none;
+  margin: 0px;
+}
+
+h1 {
+  border-color: @blue;
+  border-left-style: solid;
+  border-left-width: 12px;
+  padding-left: 20px;
+}
+
+.blog {
+  color: @blue;
+}
+
+.portfolio {
+  color: @orange;
+}
+
+.about {
+  color: @purple;
+}
+
+.contact {
+  color: @green;
+}
+
+h1 {
+  font-size: 2.8em;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background: #ffffff;
+  margin: 0px;
+  color: #464646;
+  font: 200 100%/1.6 Lato, sans-serif;
+  letter-spacing: 0;
+}
+
+#top {
+  background: @blue;
+  padding: 20px;
+
+  h1 {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05);
+    text-align: center;
+    a {
+      margin: 0px;
+      text-align: center;
+      color: @white;
+    }
+  }
+}
+
+.page-header {
+  min-height: 450px;
+  background: url("@{img_base}home-hero.jpg") no-repeat;
+  background-size: cover;
+  position: relative;
+
+  .box-out {
+    background: fade(@white, 90%);
+    padding: 20px;
+    position: absolute;
+    right: 10%;
+    height: 80%;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.navigation {
+  background: @blue_dark;
+
+  .navigate-home, .navigate-page {
+    .opacity(0);
+  }
+
+  ul {
+    .list-reset();
+    text-align: center;
+
+    li {
+      .inline-block();
+
+      a {
+        font-size: 1.4em;
+        display: block;
+        color: @white_off;
+
+        &:hover, .active {
+          .box-shadow(inset 0 -4px 0 @blue);
+
+          &.portfolio {
+            .box-shadow(inset 0 -4px 0 @orange);
+          }
+
+          &.about {
+            .box-shadow(inset 0 -4px 0 @purple);
+          }
+
+          &.contact {
+            .box-shadow(inset 0 -4px 0 @green);
+          }
+        }
+      }
+
+      span {
+        display: block;
+        padding: 10px 15px;
+      }
+    }
+
+
+  }
+}
+
+.highlights {
+
+  ul {
+    .list-reset();
+
+    .highlight-block {
+      color: @white;
+      .inline-block();
+      padding: 20px;
+
+      h1 {
+        border-color: @white;
+      }
+
+      a {
+        color: @white;
+      }
+
+      &.blog {
+        background: @blue;
+      }
+
+      &.portfolio {
+        background: @orange;
+      }
+
+      &.about {
+        background: @purple;
+      }
+
+      &.contact {
+        background: @green;
+      }
+
+    }
+  }
+}
+

@@ -1,0 +1,23 @@
+{
+	"name": "mecraig",
+	"version": "0.0.1",
+	"dependencies": {
+		"easy-tabs": "latest",
+		"html5shiv": "latest",
+		"fancybox": "latest",
+		"fitvids": "latest",
+		"FlexSlider": "latest",
+		"nestable": "latest",
+		"jquery": "1.11.2",
+		"picturefill": "latest",
+		"responsive-tables": "latest",
+		"normalize-css": "latest",
+		"lesshat": "latest"
+	},
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"lib"
+	]
+}
