@@ -130,7 +130,7 @@ module.exports = function(grunt) {
 						sortorder: 'descending'
 					}],
 					expand: true,
-					plugins: ['assemble-contrib-permalinks'],
+					plugins: ['assemble-contrib-permalinks', 'assemble-contrib-sitemap'],
 					permalinks: {
 						structure: ':year/:month/:basename:ext'
 					},
