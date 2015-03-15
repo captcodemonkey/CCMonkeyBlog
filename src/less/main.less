@@ -10,8 +10,30 @@
 @blue_dark: #34495e;
 @white: #ffffff;
 @white_off: #eeeeee;
-@gutter : 15px;
+@gray: #363636;
 @img_base: "/assets/images/";
+
+
+@gutter : 15px;
+
+/* Common Breakpoints
+-------------------------------- */
+
+/* Extra Small: 320px / 16px = 20em */
+@break-xs: 20em;
+
+/* Small: 480px / 16px = 30em */
+@break-s: 30em;
+
+/* Medium: 700px / 16px = 43.75em */
+@break-m: 43.75em;
+
+/* Large: 900px / 16px = 56.25em */
+@break-l: 56.25em;
+
+/* Extra Large: 1100px / 16px = 68.75em */
+@break-xl: 68.75em;
+@site_max: 1140px;
 
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
@@ -67,12 +89,19 @@ body {
   letter-spacing: 0;
 }
 
-.wrapper {
+.wrapper-main {
   overflow: hidden;
+  max-width: 1140px;
+  margin: 0px auto;
 }
 
 #main {
+
   .column(9);
+
+  @media screen and (max-width: @break-l) {
+    .column(12);
+  }
 
   .page-intro {
     .clearfix();
@@ -85,6 +114,11 @@ body {
 
 #sidebar {
   .column(3);
+
+  @media screen and (max-width: @break-l) {
+    .column(12);
+    padding: @gutter;
+  }
 }
 
 #top {
@@ -108,6 +142,11 @@ body {
   background-size: cover;
   position: relative;
 
+  @media screen and (max-width: @break-l) {
+    background-size: contain;
+    min-height: 300px;
+  }
+
   .box-out {
     background: fade(@white, 90%);
     padding: 20px;
@@ -117,6 +156,14 @@ body {
     margin: auto;
     top: 0;
     bottom: 0;
+
+    @media screen and (max-width: @break-l) {
+      width: auto;
+      height: auto;
+      left: 5px;
+      right: 5px;
+      margin: 100px auto 15px;
+    }
   }
 }
 
@@ -125,6 +172,10 @@ body {
 
   .navigate-home, .navigate-page {
     .opacity(0);
+
+    @media screen and (max-width: @break-l) {
+      display: none;
+    }
   }
 
   ul {
@@ -134,10 +185,20 @@ body {
     li {
       .inline-block();
 
+      @media screen and (max-width: @break-l) {
+        display: block;
+        float: none;
+        border-bottom: 1px solid @gray;
+      }
+
       a {
         font-size: 1.4em;
         display: block;
         color: @white_off;
+
+        @media screen and (max-width: @break-l) {
+          .inline-block();
+        }
 
         &:hover, .active {
           .box-shadow(inset 0 -4px 0 @blue);
@@ -181,8 +242,19 @@ body {
       margin-left: 2%;
       float: left;
 
+      @media screen and (max-width: @break-l) {
+        float: none;
+        width: auto;
+        margin: @gutter 0px;
+      }
+
       &:first-child {
         margin-left: 0px;
+
+        @media screen and (max-width: @break-l) {
+          margin: @gutter 0px;
+        }
+
       }
 
       h1 {
@@ -213,3 +285,98 @@ body {
   }
 }
 
+section.social {
+  padding: @gutter 10px 10px 10px;
+  margin-bottom: 20px;
+  .clearfix();
+
+  ul {
+    .list-reset();
+
+    li {
+      display: block;
+      float: left;
+      width: 25%;
+      margin: 0px;
+
+      &.rss {
+        background: @orange;
+      }
+
+      &.twitter {
+        background: @blue;
+      }
+
+      &.contact {
+        background: @purple;
+      }
+
+      &.github {
+        background: @blue_dark;
+      }
+    }
+
+    a {
+      display: block;
+      position: relative;
+      height: 50px;
+
+      i {
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        width: 26px;
+        height: 30px;
+        font-size: 30px;
+        color: @white;
+        .transition();
+      }
+
+      &:hover {
+
+        i {
+          font-size: 40px;
+          width: 36px;
+          height: 40px;
+        }
+
+      }
+
+      span {
+        display: block;
+        .hide-text();
+      }
+    }
+  }
+}
+
+
+.content-block {
+
+  li {
+
+    a {
+      font-size: 1.4em;
+      color: @blue;
+    }
+  }
+}
+
+
+footer {
+  background: @blue_dark;
+
+  .content {
+    margin: 0px auto;
+    max-width: @site_max;
+    padding: 20px;
+    color: @white;
+
+    p {
+      margin: 0px;
+    }
+  }
+}

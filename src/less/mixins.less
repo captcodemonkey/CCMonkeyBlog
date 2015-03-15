@@ -21,3 +21,16 @@
   zoom: 1;
   *display: inline;
 }
+
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Transition
+.transition(@duration: 0.2s, @ease: ease-out, @type: all) {
+  -webkit-transition: @type @duration @ease;
+  -moz-transition: @type @duration @ease;
+  transition: @type @duration @ease;
+}

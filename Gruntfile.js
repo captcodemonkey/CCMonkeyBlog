@@ -118,7 +118,15 @@ module.exports = function(grunt) {
 				layout: '<%= config.src %>/templates/layouts/default.hbs',
 				data: '<%= config.src %>/data/*.{json,yml}',
 				helpers: '<%= config.src %>/templates/helpers/**/*.js',
-				partials: '<%= config.src %>/templates/partials/*.hbs'
+				partials: '<%= config.src %>/templates/partials/*.hbs',
+
+				collections: [
+					{
+						name: 'navMain',
+						sortby: 'navOrder',
+						sortorder: 'ascending'
+					}
+				]
 			},
 			// Generate posts by forcing Handlebars
 			// to recognize `.md` files as templates.
@@ -129,33 +137,38 @@ module.exports = function(grunt) {
 						sortby: 'posted',
 						sortorder: 'descending'
 					}],
-					expand: true,
-					plugins: ['assemble-contrib-permalinks', 'assemble-contrib-sitemap'],
+					plugins: ['assemble-contrib-permalinks'],
 					permalinks: {
 						structure: ':year/:month/:basename:ext'
 					},
 					layout: '<%= config.src %>/templates/layouts/default.hbs'
 				},
-				files: {
-					'<%= config.dist %>/blog/': ['<%= config.src %>/content/blog/*.hbs']
-				}
+				files: [{
+					cwd: './src/content/blog/',
+					dest: './dist/blog/',
+					expand: true,
+					src: ['**/*.hbs']
+				}]
 			},
-      pages: {
-        options: {
-          plugins: ['assemble-contrib-anchors','assemble-contrib-permalinks','assemble-contrib-sitemap','assemble-contrib-toc']
-        },
-        files: {
-          '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
-        }
-      },
-			blog: {
+			pages: {
 				options: {
-					flatten: true,
-					plugins: ['assemble-contrib-permalinks']
+					collections: [{
+						name: 'pages',
+						sortby: 'posted',
+						sortorder: 'descending'
+					}],
+					plugins: ['assemble-contrib-permalinks'],
+					permalinks: {
+						structure: ':basename/index.html'
+					},
+					layout: '<%= config.src %>/templates/layouts/default.hbs'
 				},
-				files: {
-					'<%= config.dist %>/blog/': ['<%= config.src %>/templates/pages/blog/*.hbs']
-				}
+				files: [{
+					cwd: './src/content/_pages/',
+					dest: './dist/',
+					expand: true,
+					src: ['**/*.hbs']
+				}]
 			}
     },
 
@@ -193,6 +206,7 @@ module.exports = function(grunt) {
     'copy',
     'assemble',
 		'wiredep',
+		'less',
 		'useminPrepare',
 		'concat',
 		'uglify',
