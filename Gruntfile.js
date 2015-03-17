@@ -132,16 +132,11 @@ module.exports = function(grunt) {
 			// to recognize `.md` files as templates.
 			posts: {
 				options: {
-					collections: [{
-						name: 'entries',
-						sortby: 'posted',
-						sortorder: 'descending'
-					}],
 					plugins: ['assemble-contrib-permalinks'],
 					permalinks: {
-						structure: ':year/:month/:basename:ext'
+						structure: ':year/:month/:basename/index.html'
 					},
-					layout: '<%= config.src %>/templates/layouts/default.hbs'
+					layout: '<%= config.src %>/templates/layouts/page.hbs'
 				},
 				files: [{
 					cwd: './src/content/blog/',

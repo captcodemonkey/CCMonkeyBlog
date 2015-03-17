@@ -2,6 +2,7 @@
 	module.exports.register = function(Handlebars, options) {
 
 		var grunt  = require('grunt');
+		var yfm = require('assemble-front-matter');
 		path = require('path');
 
 		/*
@@ -13,17 +14,18 @@
 				return {path: path};
 			}).map(function(obj) {
 
-				var filecontent = globFiles(obj.path);
+				var FM = getFM(obj.path);
+
 				var filename = path.basename(obj.path, '.hbs').replace('helper-', '');
-				return '<div class="pl__atom"><h2 class="pl__atom__title">' + filename + '</h2><div class="pl__atom__content">' + filecontent + '</div></div>\n';
+
+
+				return '<li><a href="' + FM.url + '">' + FM.title + '</a></li>' + '\n';
 			}).join(grunt.util.normalizelf(grunt.util.linefeed));
 		};
 
-		var globFiles = function(src) {
-			var content = grunt.file.expand(src).map(grunt.file.read).join(grunt.util.normalizelf(grunt.util.linefeed));
-			return content;
+		var getFM = function(src) {
+			return yfm.extract(src).context;
 		};
-
 
 		/*
 		 * atoms helper

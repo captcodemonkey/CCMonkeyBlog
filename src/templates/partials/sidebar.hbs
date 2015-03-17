@@ -18,32 +18,14 @@
 <section class="content-block">
   <h1 class="aside">Latest</h1>
   <ul>
-    {{#withSort navMain 'data.navOrder'}}
-    {{#each this.pages}}
-    <li>
-      SOMETHING WORKED
-    </li>
-    {{/each}}
-    {{/withSort}}
-    {{!-- {{list posts}} --}}
-    {{#if this.page.data.listPosts }}
-    {{#each site.posts}}
-    <li><a href="{{ this.url }}">{{ this.title }}</a></li>
-    {{/each}}
-
-    {{/if}}
+    {{atoms "src/content/blog/**/*.hbs"}}
   </ul>
 </section>
 
 <section class="content-block">
   <h1 class="aside">Categories</h1>
   <ul>
-    <li><a href="/blog/category/conferences">Conferences</a></li>
-    <li><a href="/blog/category/css">CSS</a></li>
-    <li><a href="/blog/category/dev-tools">Dev Tools</a></li>
-    <li><a href="/blog/category/general">General</a></li>
-    <li><a href="/blog/category/javascript">JavaScript</a></li>
-    <li><a href="/blog/category/jquery">jQuery</a></li>
+    <li><a href="/blog/category/personal">Personal</a></li>
     <li><a href="/blog/category/site">Site</a></li>
   </ul>
 </section>
