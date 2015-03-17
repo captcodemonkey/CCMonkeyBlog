@@ -1,4 +1,4 @@
-(function() {
+
 	module.exports.register = function(Handlebars, options) {
 
 		var grunt  = require('grunt');
@@ -11,29 +11,36 @@
 		 */
 		var categories = function(src, category) {
 
-			var output = [];
+			var pages = [];
 			var output_str = "";
 			var content;
 			content = grunt.file.expand(src).map(function(path) {
 				return {path: path};
 			}).map(function(obj) {
 				var FM = getFM(obj.path);
-				output.push(FM);
+				pages.push(FM);
 			});
 
-			output = _.filter(output, function(entry) {
-				return _.contains(entry.categories, category);
-			});
+			if(category !== false) {
+				pages = _.filter(pages, function(entry) {
+					return _.contains(entry.categories, category);
+				});
+			}
 
-			output = _.sortBy(output, function(entry) {
+			pages = _.sortBy(pages, function(entry) {
 				return entry.date;
 			});
 
-			_.each(output, function(entry) {
+			return pages;
+
+			/*
+			_.each(pages, function(entry) {
 				output_str += '<li><a href="' + entry.url + '">' + entry.title + '</a></li>\n';
 			});
+			 return output_str;
+			*/
 
-			return output_str;
+
 		};
 
 		var getFM = function(src) {
@@ -43,9 +50,12 @@
 		/*
 		 * categories helper
 		 */
-		Handlebars.registerHelper("categories", function(src, category) {
-			return new Handlebars.SafeString(categories(src, category));
+		Handlebars.registerHelper("categories", function(src, category, opts) {
+			var pages = categories(src, category);
+			return _.map(pages, function(item) {
+				grunt.log.writeln(JSON.stringify(opts.fn(item)));
+				return opts.fn(item);
+			}).join(grunt.util.normalizelf(grunt.util.linefeed));
 		});
 
 	};
-}).call(this);

@@ -3,4 +3,8 @@ title: Tags
 heading: 'Yo, Assemble!'
 lead: Welcome to my blog!
 ---
-{{categories "src/content/blog/**/*.hbs" "site"}}
+<ul>
+{{#categories "src/content/blog/**/*.hbs" "site"}}
+  <li><a href="{{ url }}">{{ title }}</a></li>
+{{/categories}}
+</ul>

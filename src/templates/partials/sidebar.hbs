@@ -18,7 +18,9 @@
 <section class="content-block">
   <h1 class="aside">Latest</h1>
   <ul>
-    {{atoms "src/content/blog/**/*.hbs"}}
+    {{#categories "src/content/blog/**/*.hbs" false}}
+      <li><a href="{{ url }}">{{ title }}</a></li>
+    {{/categories}}
   </ul>
 </section>
 
