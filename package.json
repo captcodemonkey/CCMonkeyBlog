@@ -1,8 +1,8 @@
 {
-  "name": "mecraig3",
-  "description": "The best project ever..",
+  "name": "mecraig",
+  "description": "Craig McCoy",
   "version": "0.1.0",
-  "homepage": "https://github.com/captcodemonkey/mecraig3",
+  "homepage": "http://captaincodemonkey.com",
   "author": {
     "name": "Craig McCoy",
     "url": "http://github.com/captcodemonkey/"
@@ -39,8 +39,10 @@
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-filerev": "^2.2.0",
+    "grunt-sftp-deploy": "^0.2.2",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
+    "helper-moment": "^0.1.0",
     "load-grunt-tasks": "^0.6.0",
     "time-grunt": "^1.0.0",
     "underscore": "^1.8.2"

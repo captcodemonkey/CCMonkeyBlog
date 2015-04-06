@@ -1,10 +1,22 @@
 ---
-title: Tags
-heading: 'Yo, Assemble!'
+title: Articles Using Tag [site]
+heading: 'Articles Using Tag [site]'
 lead: Welcome to my blog!
 ---
-<ul>
-{{#categories "src/content/blog/**/*.hbs" "site"}}
-  <li><a href="{{ url }}">{{ title }}</a></li>
-{{/categories}}
-</ul>
+<div class="blog-list">
+  {{#categories "src/content/blog/**/*.hbs" "site"}}
+  <article>
+    <a href="{{ url }}"><h2>{{ title }}</h2></a>
+    <div class="date">
+      <i class="fa fa-calendar"></i>{{moment  date  format ="MMMM Do, YYYY" }}
+    </div>
+    <div class="category">
+      {{#each categories}}
+      <div><a href="/blog/category/{{this}}/"><i class="fa fa-tags"></i>{{this}}</a></div>
+      {{/each}}
+    </div>
+    <p>{{ lead }}</p>
+    <a class="more" href="{{ url }}">Read more about "{{ title }}"</a>
+  </article>
+  {{/categories}}
+</div>

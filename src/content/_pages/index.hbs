@@ -5,13 +5,20 @@ lead: Welcome to my blog!
 listPosts: true
 home: true
 ---
+<div class="blog-list">
 {{#categories "src/content/blog/**/*.hbs" false}}
   <article>
-    <h2>{{ title }}</h2>
+    <a href="{{ url }}"><h2>{{ title }}</h2></a>
     <div class="date">
-      {{ date }}
+      <i class="fa fa-calendar"></i>{{moment  date  format ="MMMM Do, YYYY" }}
+    </div>
+    <div class="category">
+      {{#each categories}}
+        <div><a href="/blog/category/{{this}}/"><i class="fa fa-tags"></i>{{this}}</a></div>
+      {{/each}}
     </div>
     <p>{{ lead }}</p>
-    <a href="{{ url }}">Read more about "{{ title }}"</a>
+    <a class="more" href="{{ url }}">Read more about "{{ title }}"</a>
   </article>
 {{/categories}}
+</div>

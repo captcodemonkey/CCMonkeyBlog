@@ -1,10 +1,10 @@
 ---
-title: Blog
-heading: 'Blog'
+title: Articles Using Tag [personal]
+heading: 'Articles Using Tag [personal]'
 lead: Welcome to my blog!
 ---
 <div class="blog-list">
-  {{#categories "src/content/blog/**/*.hbs" false}}
+  {{#categories "src/content/blog/**/*.hbs" "personal"}}
   <article>
     <a href="{{ url }}"><h2>{{ title }}</h2></a>
     <div class="date">

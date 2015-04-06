@@ -23,10 +23,27 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
 
-    config: {
-      src: 'src',
-      dist: 'dist'
-    },
+		config: {
+			src: 'src',
+			dist: 'dist'
+		},
+
+		'sftp-deploy': {
+			build: {
+				auth: {
+					host: '104.236.91.125',
+					port: '22',
+					authKey: 'privateKeyCustom'
+				},
+				cache: 'sftpCache.json',
+				src: 'dist',
+				dest: '/usr/share/nginx/html/',
+				exclusions: ['dist/**/.DS_Store', 'dist/**/Thumbs.db', 'dist/tmp'],
+				serverSep: '/',
+				concurrency: 4,
+				progress: true
+			}
+		},
 
 		less: {
 			style: {
@@ -46,12 +63,16 @@ module.exports = function(grunt) {
 
     watch: {
       assemble: {
-        files: ['<%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
-        tasks: ['assemble']
+        files: ['<%= config.src %>/{content,data,templates}/**/*.{md,hbs,yml}'],
+        tasks: ['build']
       },
 			less: {
 				files: ['<%= config.src %>/less/**/*.less'],
 				tasks: ['less']
+			},
+			copy: {
+				files: ['<%= config.src %>/**/*.{js,png,jpg,jpeg,gif}'],
+				tasks: ['build']
 			},
       livereload: {
         options: {
@@ -91,7 +112,7 @@ module.exports = function(grunt) {
 				// Point to the files that should be updated when
 				// you run `grunt wiredep`
 				src: [
-					'<%= config.dist %>**/*.html'   // .html support...
+					'<%= config.src %>/templates/partials/*.hbs'   // .html support...
 				],
 
 				options: {
@@ -104,11 +125,11 @@ module.exports = function(grunt) {
 		},
 
 		useminPrepare: {
-			html: '<%= config.dist %>**/*.html'
+			hbs: '<%= config.src %>/templates/partials/*.hbs'
 		},
 
 		usemin: {
-			html: '<%= config.dist %>**/*.html'
+			hbs: '<%= config.src %>/templates/partials/*.hbs'
 		},
 
     assemble: {
@@ -117,7 +138,7 @@ module.exports = function(grunt) {
 				assets: '<%= config.dist %>/assets',
 				layout: '<%= config.src %>/templates/layouts/default.hbs',
 				data: '<%= config.src %>/data/*.{json,yml}',
-				helpers: '<%= config.src %>/templates/helpers/**/*.js',
+				helpers: ['helper-moment', '<%= config.src %>/templates/helpers/**/*.js'],
 				partials: '<%= config.src %>/templates/partials/*.hbs',
 
 				collections: [
@@ -145,6 +166,21 @@ module.exports = function(grunt) {
 					src: ['**/*.hbs']
 				}]
 			},
+			home: {
+				options: {
+					plugins: ['assemble-contrib-permalinks'],
+					permalinks: {
+						structure: ':basename/index.html'
+					},
+					layout: '<%= config.src %>/templates/layouts/default.hbs'
+				},
+				files: [{
+					cwd: './src/content/_pages/',
+					dest: './dist/',
+					expand: true,
+					src: ['index.hbs']
+				}]
+			},
 			pages: {
 				options: {
 					collections: [{
@@ -156,13 +192,13 @@ module.exports = function(grunt) {
 					permalinks: {
 						structure: ':basename/index.html'
 					},
-					layout: '<%= config.src %>/templates/layouts/default.hbs'
+					layout: '<%= config.src %>/templates/layouts/page.hbs'
 				},
 				files: [{
 					cwd: './src/content/_pages/',
 					dest: './dist/',
 					expand: true,
-					src: ['**/*.hbs']
+					src: ['**/*.hbs', '!index.hbs']
 				}]
 			}
     },
@@ -179,7 +215,13 @@ module.exports = function(grunt) {
         cwd: 'src/assets/',
         src: '**',
         dest: '<%= config.dist %>/assets/'
-      }
+      },
+			partials: {
+				expand: true,
+				cwd: '<%= config.src %>/templates/partials_src/',
+				src: '**',
+				dest: '<%= config.src %>/templates/partials/'
+			}
     },
 
     // Before generating any new files,
@@ -198,19 +240,24 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean',
-    'copy',
-    'assemble',
+		'copy:partials',
 		'wiredep',
 		'less',
 		'useminPrepare',
 		'concat',
-		'uglify',
-		'cssmin',
-		'usemin'
+		'usemin',
+    'copy:bootstrap',
+		'copy:theme',
+    'assemble'
+
   ]);
 
   grunt.registerTask('default', [
     'build'
   ]);
+
+	grunt.registerTask('deploy', [
+	'sftp-deploy'
+	]);
 
 };

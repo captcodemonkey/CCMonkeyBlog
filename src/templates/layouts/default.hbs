@@ -29,6 +29,8 @@
 
 
     {{> header }}
+    {{> header-tag }}
+    {{> header-nav }}
 
     <div class="wrapper-main">
       <div class="row">
@@ -36,8 +38,10 @@
 
           {{> top }}
 
-          {{#if page.heading }}<h1> {{ page.heading }}</h1>{{/if}}
-          {{> body }}
+          <div class="page-content">
+            {{#if page.heading }}<h1> {{ page.heading }}</h1>{{/if}}
+            {{> body }}
+          </div>
 
         </div>
 
@@ -48,10 +52,6 @@
     </div>
 
     {{> footer }}
-
-    <!-- build:js assets/js/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
+    {{> scripts }}
   </body>
 </html>

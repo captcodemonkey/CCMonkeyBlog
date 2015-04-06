@@ -24,20 +24,29 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="{{ page.class }}">
 
 
 
     {{> header }}
+    {{> header-nav }}
 
     <div class="wrapper-main">
       <div class="row">
-        <div id="main" role="main">
+        <div id="main" class="page" role="main">
 
           {{> top }}
 
           <article>
-            <h1> {{ page.title }}</h1>
+            {{#if page.heading }}<h1> {{ page.heading }}</h1>{{else}}<h1> {{ page.title }}</h1>{{/if}}
+            <div class="date">
+              <i class="fa fa-calendar"></i>{{moment  page.date  format ="MMMM Do, YYYY" }}
+            </div>
+            <div class="category">
+              {{#each page.categories}}
+              <div><a href="/blog/category/{{this}}/"><i class="fa fa-tags"></i>{{this}}</a></div>
+              {{/each}}
+            </div>
             {{> body }}
           </article>
 
@@ -50,10 +59,6 @@
     </div>
 
     {{> footer }}
-
-    <!-- build:js assets/js/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
+    {{> scripts }}
   </body>
 </html>
