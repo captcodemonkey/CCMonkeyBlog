@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,700|Source+Code+Pro:300|Droid+Serif:700" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>{{title}} | {{site.title}}</title>
+
+    <!-- build:css assets/css/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
+    <!-- Custom styles for this template -->
+    <link href="/{{assets}}/css/main.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="{{ page.class }}">
+
+
+
+    {{> header }}
+    {{> header-nav }}
+
+    <div class="wrapper-main">
+      <div class="row">
+        <div id="main" class="post" role="main">
+
+          {{> top }}
+
+          <article>
+            {{#if page.heading }}<h1> {{ page.heading }}</h1>{{else}}<h1> {{ page.title }}</h1>{{/if}}
+            <div class="date">
+              <i class="fa fa-calendar"></i>{{moment  page.date  format ="MMMM Do, YYYY" }}
+            </div>
+            <div class="category">
+              {{#each page.categories}}
+              <div><a href="/blog/category/{{this}}/"><i class="fa fa-tags"></i>{{this}}</a></div>
+              {{/each}}
+            </div>
+            {{> body }}
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+              /* * * CONFIGURATION VARIABLES * * */
+              var disqus_shortname = 'captaincodemonkey';
+
+              /* * * DON'T EDIT BELOW THIS LINE * * */
+              (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+          </article>
+
+        </div>
+
+        <aside id="sidebar">
+          {{> sidebar }}
+        </aside>
+      </div>
+    </div>
+
+    {{> footer }}
+    {{> scripts }}
+  </body>
+</html>
