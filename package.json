@@ -43,8 +43,8 @@
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
     "helper-moment": "^0.1.0",
-    "load-grunt-tasks": "^0.6.0",
-    "time-grunt": "^1.0.0",
+    "load-grunt-tasks": "^3.3.0",
+    "time-grunt": "^1.2.2",
     "underscore": "^1.8.2"
   },
   "licenses": [

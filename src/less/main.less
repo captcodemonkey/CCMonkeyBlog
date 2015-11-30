@@ -130,6 +130,38 @@ body {
 
   article {
     padding: @gutter;
+    padding-top: 60px;
+
+    h1, h2, h3, h4, h5 {
+      clear: both;
+    }
+
+    h2 {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      border-color: @purple;
+      margin-top: 30px;
+    }
+
+    h3 {
+      border-top: 3px solid @blue;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    p {
+      img {
+        max-width: 50%;
+        float: left;
+        margin: 20px;
+      }
+    }
+
+    .price {
+      display: inline-block;
+      float: right;
+      font-size: 2em;
+    }
   }
 }
 
